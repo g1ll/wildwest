@@ -898,7 +898,7 @@ function canvasApp() {
 
     function resize() {
         size = getWindowSize();
-        if (Math.min(size.w, size.h) <= 600 || isMobile()) {
+        if (Math.min(size.w, size.h) <= 600 ){//|| isMobile()) {
             w = size.w * 0.9;
             h = size.h * 0.9;
             text_size = Math.max(w, h) * 0.02;
