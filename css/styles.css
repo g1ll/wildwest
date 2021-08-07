@@ -1,0 +1,48 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04/12/2016, 15:21:45
+    Author     : echoe
+*/
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../img/background.jpg);
+    background-size: 100%;
+    font-family: west, west-icon, serif;
+}
+@font-face {
+    font-family: west;
+    src: url(../fonts/west.ttf);
+}
+@font-face {
+    font-family: west-icon;
+    src: url(../fonts/wwi.ttf);
+}
+
+h1{
+    font-family: west, serif;
+    color: orangered;
+    text-align: center;
+    margin:10px;
+    background-color: rgba(255,255,255,0.1)
+}
+i{
+    font-family: west-icon, serif;  
+    font-weight: normal;
+}
+#canvas{
+    display: block;
+    margin:0 auto;
+}
+
+#tw{
+    font-family: west, serif;
+    color: #eee8a3;
+    text-align: center;
+    margin:0 auto;
+    width: 50%;
+}
