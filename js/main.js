@@ -45,6 +45,7 @@ function canvasApp() {
     var intro;
     var intro_link = "sounds/intro.mp3";
     var theme;
+    var reset = false;
     //    var link1 = "http://soundbible.com/grab.php?id=1947&type=mp3";
     var link1 = "sounds/theme.mp3";
     var punch_sound;
@@ -86,6 +87,10 @@ function canvasApp() {
     load_assets();
 
     function init() {
+        if(reset){
+            clearInterval(reset)
+            reset = false;
+        }
         resize();
         load = 0;
         xs = canvas.width / 2; //cowboy position x centro do canvas
@@ -625,8 +630,8 @@ function canvasApp() {
                 }
             } else {
                 dir_cb === 'fall';
-                if (key === 32) {
-                    setTimeout(() => {
+                if (key === 32 && !reset) {
+                    reset = setTimeout(() => {
                         clearInterval(loop);
                         theme.pause();
                         theme.currentTime = 0;
@@ -646,14 +651,16 @@ function canvasApp() {
         //Controlando o snake com o touch Native JS
         document.getElementById("canvas").addEventListener("touchstart", function (event) {
             if (load >= total || dead) {
-                setTimeout(() => {
-                    //Recriando o intervalo para o loop
-                    if (typeof loop !== "undefined") //Testa se o loop já foi criado
-                        clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
-                    intro.pause();
-                    intro.currentTime = 0;
-                    init()
-                }, 1000);
+
+                if (!reset)
+                    reset = setTimeout(() => {
+                        //Recriando o intervalo para o loop
+                        if (typeof loop !== "undefined") //Testa se o loop já foi criado
+                            clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
+                        intro.pause();
+                        intro.currentTime = 0;
+                        init()
+                    }, 1000);
             }
 
 
@@ -667,16 +674,17 @@ function canvasApp() {
 
         //Controlando o snake com o clique Native JS
         document.getElementById("canvas").addEventListener("click", function (event) {
-            if (load >= total || dead) {
-                setTimeout(() => {
-                    //Recriando o intervalo para o loop
-                    if (typeof loop !== "undefined") //Testa se o loop já foi criado
-                        clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
-                    intro.pause();
-                    intro.currentTime = 0;
-                    init();
-                }, 1000);
-            }
+            if (!reset)
+                if (load >= total || dead) {
+                    reset = setTimeout(() => {
+                        //Recriando o intervalo para o loop
+                        if (typeof loop !== "undefined") //Testa se o loop já foi criado
+                            clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
+                        intro.pause();
+                        intro.currentTime = 0;
+                        init();
+                    }, 1000);
+                }
 
             event.preventDefault();
             //Guarda as posições do toque
