@@ -373,11 +373,13 @@ function canvasApp() {
             //Background
             context.fillStyle = "rgba(255,255,255,1)";
             context.fillRect(0, 0, canvas.width, canvas.height);
-            print_center("READY " + p + "%  !!!", canvas.height / 2 - 70, "rgba(0,0,0," + cload + ")", "bold", 24, "west");
-            print_center("Move the CowBoy with keys up, down, left and right  (←↑→↓) ", canvas.height / 2 + 50, "rgba(0,0,0," + cload + ")", "bold", 24, "west");
-            print_center("to capture the money bag and scape of the shots! ", canvas.height / 2 + 75, "rgba(0,0,0," + cload + ")", "bold", 24, "west");
+            print_center("READY " + p + "%  !!!", canvas.height / 2 - 150, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
+            print_center("Move the CowBoy with keys", canvas.height / 2 - 100, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
+            print_center("up, down, left and right  (←↑→↓) ", canvas.height / 2 - 75, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
+            print_center("to capture the money bag", canvas.height / 2 - 50, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
+            print_center("and scape of the shots!", canvas.height / 2 - 25, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
             context.globalAlpha = p / 100;
-            context.drawImage(img_cowboy_n, 0, 0, 48, 70, canvas.width / 2 - 24, canvas.height / 2 - 35, 48, 70);
+            context.drawImage(img_cowboy_n, 0, 0, 48, 70, canvas.width / 2 - 24, canvas.height / 2 + 45, 48, 70);
             context.globalAlpha = 1;
         } else {
             //Background
@@ -629,7 +631,7 @@ function canvasApp() {
                         theme.pause();
                         theme.currentTime = 0;
                         init();
-                    }, 500);
+                    }, 1000);
                 }
             }
         });
@@ -644,12 +646,14 @@ function canvasApp() {
         //Controlando o snake com o touch Native JS
         document.getElementById("canvas").addEventListener("touchstart", function (event) {
             if (load >= total || dead) {
-                //Recriando o intervalo para o loop
-                if (typeof loop !== "undefined") //Testa se o loop já foi criado
-                    clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
-                intro.pause();
-                intro.currentTime = 0;
-                setTimeout(init, 500);
+                setTimeout(() => {
+                    //Recriando o intervalo para o loop
+                    if (typeof loop !== "undefined") //Testa se o loop já foi criado
+                        clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
+                    intro.pause();
+                    intro.currentTime = 0;
+                    init()
+                }, 1000);
             }
 
 
