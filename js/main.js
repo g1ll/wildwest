@@ -45,20 +45,20 @@ function canvasApp() {
     var intro;
     var intro_link = "sounds/intro.mp3";
     var theme;
-//    var link1 = "http://soundbible.com/grab.php?id=1947&type=mp3";
+    //    var link1 = "http://soundbible.com/grab.php?id=1947&type=mp3";
     var link1 = "sounds/theme.mp3";
     var punch_sound;
-//    var link2 = "http://soundbible.com/grab.php?id=1876&type=mp3";
+    //    var link2 = "http://soundbible.com/grab.php?id=1876&type=mp3";
     var link2 = "sounds/punch.mp3";
     var gun_sound;
-//    var link3 = 'http://soundbible.com/grab.php?id=2121&type=mp3';
+    //    var link3 = 'http://soundbible.com/grab.php?id=2121&type=mp3';
     var link3 = 'sounds/380.mp3';
     var die_sound;
-//    var link4 = 'http://soundbible.com/grab.php?id=1033&type=mp3';
-//    var link4 = 'http://soundbible.com/grab.php?id=1454&type=mp3';
+    //    var link4 = 'http://soundbible.com/grab.php?id=1033&type=mp3';
+    //    var link4 = 'http://soundbible.com/grab.php?id=1454&type=mp3';
     var link4 = 'sounds/pain.mp3';
     var win_sound;
-//    var link5 = 'http://soundbible.com/grab.php?id=1412&type=mp3';
+    //    var link5 = 'http://soundbible.com/grab.php?id=1412&type=mp3';
     var link5 = 'sounds/yahoo.mp3';
     var deadsound;
     var link_deadsound = 'sounds/end.mp3';
@@ -142,8 +142,7 @@ function canvasApp() {
         intro.pause();
         intro.currentTime = 0;
         deadsound.pause();
-        if (typeof deadsound.loop === 'boolean')
-        {
+        if (typeof deadsound.loop === 'boolean') {
             deadsound.loop = false;
         } else {
             deadsound.removeEventListener('ended', function () {
@@ -152,14 +151,14 @@ function canvasApp() {
         }
         deadsound.currentTime = 0;
         theme.volume = 1;
-        theme.play();
+        // theme.play();
         clearInterval(loop);
         loop = setInterval(mainLoop, interval);
-//        setTimeout(function () {
-//            gun_sound.currentTime = 0;
-//            gun_sound.play();
-//            moveBullet();
-//        }, 600);
+        //        setTimeout(function () {
+        //            gun_sound.currentTime = 0;
+        //            gun_sound.play();
+        //            moveBullet();
+        //        }, 600);
 
     }
 
@@ -174,7 +173,7 @@ function canvasApp() {
         if (!dead) {
 
             //if (c_shot > 0)
-                moveBullet();
+            moveBullet();
 
             drawBullet();
 
@@ -192,8 +191,7 @@ function canvasApp() {
                 deadsound.currentTime = 0;
                 deadsound.volume = 0.5;
                 deadsound.play();
-                if (typeof deadsound.loop === 'boolean')
-                {
+                if (typeof deadsound.loop === 'boolean') {
                     deadsound.loop = true;
                 } else {
                     deadsound.addEventListener('ended', function () {
@@ -214,8 +212,8 @@ function canvasApp() {
 
             if (!moveu) {
                 print_center("Controle o cowboy com as teclas A B C D ! Fuja dos tiros !!!"
-                        , "rgba(0,0,0,.5)"
-                        , 36);
+                    , "rgba(0,0,0,.5)"
+                    , 36);
             }
         }
 
@@ -225,10 +223,10 @@ function canvasApp() {
     }//FIM MAIN LOOP
 
 
-//Função para mover o smile
+    //Função para mover o smile
     function moveCowboy() {//receve o código da tecla apertada
-//        console.log("x: " + xs + " || tx: " + touchX + " ");
-//        console.log("y: " + xy + " || ty: " + touchY + " ");
+        //        console.log("x: " + xs + " || tx: " + touchX + " ");
+        //        console.log("y: " + xy + " || ty: " + touchY + " ");
         if (!dead && (istouch || isclick)) {
             if ((touchX < xs && touchX !== 0) && dir_cb !== "right") {
                 state_cb = 'walk';
@@ -300,55 +298,57 @@ function canvasApp() {
         }
     }
 
-//funçao para mover os quadrados aleatóriamente
+    //funçao para mover os quadrados aleatóriamente
     function moveBullet() {
 
-        if (moveu) {
-            if (yr > 2 * canvas.height || xr > 2 * canvas.width) {
-                c_shot++;
-                gun_sound.currentTime = 0;
-                gun_sound.play();
-                v = Math.round(Math.random());
-                d = Math.round(Math.random());
-                //console.log(v);
-                xr = 0;
-                yr = 0;
-                if (v) {
-                    xr = xs;
-                    if (d)
-                        xr = Math.random() * canvas.width - 50;
-                } else {
-                    yr = ys;
-                    if (d)
-                        yr = Math.random() * canvas.height - 50;
-                }
-            }
+        // if (moveu) {
+        if (yr > 2 * canvas.height || xr > 2 * canvas.width) {
+            c_shot++;
+            gun_sound.currentTime = 0;
+            gun_sound.play();
+            v = Math.round(Math.random());
+            d = Math.round(Math.random());
+            //console.log(v);
+            xr = 0;
+            yr = 0;
             if (v) {
-                yr += vel_ret;
+                xr = xs;
                 if (d)
-                    xr += vel_ret / 2;
+                    xr = Math.random() * canvas.width - 50;
             } else {
-                xr += vel_ret;
+                yr = ys;
                 if (d)
-                    yr += vel_ret / 2;
+                    yr = Math.random() * canvas.height - 50;
             }
+        }
+
+        if (v) {
+            yr += vel_ret;
+            if (d)
+                xr += vel_ret / 2;
         } else {
             xr += vel_ret;
+            if (d)
+                yr += vel_ret / 2;
         }
+        // } 
+        // else {
+        //     xr += vel_ret;
+        // }
     }
 
-//teste de colisão simples baseado apenas nas posições x e y dos objetos
+    //teste de colisão simples baseado apenas nas posições x e y dos objetos
     function colisao(x1, y1, w1, h1, x2, y2, rs) {
-//testa se x2 esta em x1        
+        //testa se x2 esta em x1        
         var x = x1 - rs;
         var y = y1 - rs;
         var w = w1 + rs * 2;
         var h = h1 + rs * 2;
         //Retângulo ampliado
-//        context.strokeStyle = "#000";
-//        context.strokeRect(x, y, w, h);
-//        context.strokeStyle = "red";
-//        context.strokeRect(x2, y2, 1, 1);
+        //        context.strokeStyle = "#000";
+        //        context.strokeRect(x, y, w, h);
+        //        context.strokeStyle = "red";
+        //        context.strokeRect(x2, y2, 1, 1);
         if ((x2 >= x && x2 <= x + w) && ((y2 >= y && y2 <= y + h)))
             return true;
         else
@@ -358,7 +358,7 @@ function canvasApp() {
     function isLoaded() {
         resize();
         //if(intro.){
-        intro.play();
+        // intro.play();
         //}
         var p = Math.round(((load * 100) / total));
         if (cload < 1) {
@@ -400,13 +400,13 @@ function canvasApp() {
             context.beginPath();
             context.fillStyle = "rgba(255,0,0," + (Math.random() + .5) + ")";
             context.arc(
-                    xs + ((Math.round(Math.random())) ? +(Math.round(Math.random() * dsp)) : -(Math.round(Math.random() * dsp))), //Posição X, referência ao centro do círculo;
-                    ys + ((Math.round(Math.random())) ? +(Math.round(Math.random() * dsp)) : -(Math.round(Math.random() * dsp))), //Posição Y;
-                    (Math.round(Math.random() * 2)), //Raio do círculo;
-                    (Math.PI / 180) * 0, //Ângulo inicial, onde começará o traço;
-                    (Math.PI / 180) * 180, //Ângulo final, onde termina o traço;
-                    false //Sentido do traço, horário (FALSE), anti-horário (TRUE);
-                    );
+                xs + ((Math.round(Math.random())) ? +(Math.round(Math.random() * dsp)) : -(Math.round(Math.random() * dsp))), //Posição X, referência ao centro do círculo;
+                ys + ((Math.round(Math.random())) ? +(Math.round(Math.random() * dsp)) : -(Math.round(Math.random() * dsp))), //Posição Y;
+                (Math.round(Math.random() * 2)), //Raio do círculo;
+                (Math.PI / 180) * 0, //Ângulo inicial, onde começará o traço;
+                (Math.PI / 180) * 180, //Ângulo final, onde termina o traço;
+                false //Sentido do traço, horário (FALSE), anti-horário (TRUE);
+            );
             context.fill(); //Desenha o contorno do círculo
             context.closePath(); //Finaliza o caminho "Path" do desenho atual
         }
@@ -436,26 +436,26 @@ function canvasApp() {
         //Retângulo
         //context.fillStyle = "#2E2E2E";
         //context.fillRect(xr, yr, wr, hr);
-//        context.beginPath();
-//        context.fillStyle = "#2E2E2E";
-//        context.arc(
-//                xr, //Posição X, referência ao centro do círculo;
-//                yr, //Posição Y;
-//                wr / 2, //Raio do círculo;
-//                (Math.PI / 180) * 0, //Ângulo inicial, onde começará o traço;
-//                (Math.PI / 180) * 360, //Ângulo final, onde termina o traço;
-//                false //Sentido do traço, horário (FALSE), anti-horário (TRUE);
-//                );
-//        context.fill(); //Realiza o prenchimento do círculo
-//        context.closePath(); //Finaliza o caminho "Path" do desenho atual
+        //        context.beginPath();
+        //        context.fillStyle = "#2E2E2E";
+        //        context.arc(
+        //                xr, //Posição X, referência ao centro do círculo;
+        //                yr, //Posição Y;
+        //                wr / 2, //Raio do círculo;
+        //                (Math.PI / 180) * 0, //Ângulo inicial, onde começará o traço;
+        //                (Math.PI / 180) * 360, //Ângulo final, onde termina o traço;
+        //                false //Sentido do traço, horário (FALSE), anti-horário (TRUE);
+        //                );
+        //        context.fill(); //Realiza o prenchimento do círculo
+        //        context.closePath(); //Finaliza o caminho "Path" do desenho atual
 
         //if (v)
         //  context.drawImage(img_bullet2, xr - 12, yr - 12, wr * 5, hr * 5);
         //else
         var w = 752;
         var h = 658;
-//        var w = 35;
-//        var h = 15;
+        //        var w = 35;
+        //        var h = 15;
 
         if (d) {
             drawRotatedImage(img_bullet, 0, 0, w, h, xr, yr, wr * 5, hr * 5, 45);
@@ -533,7 +533,7 @@ function canvasApp() {
     }
 
     function drawHud() {
-//        context.fillStyle = "rgba(255,255,255,0.6)";
+        //        context.fillStyle = "rgba(255,255,255,0.6)";
         context.fillStyle = context.createPattern(img_hud_back, 'repeat');
         context.fillRect(0, 0, canvas.width, 30);
         var mil = "";
@@ -576,7 +576,7 @@ function canvasApp() {
 
 
     function drawRotatedImage(img, cx, cy, cw, ch, x, y, width, height, degrees) {
-//fonte: http://jsfiddle.net/m1erickson/z4p3n/
+        //fonte: http://jsfiddle.net/m1erickson/z4p3n/
         // first save the untranslated/unrotated context
         context.save();
 
@@ -600,6 +600,8 @@ function canvasApp() {
         //Evento do teclado com JQuery
         $(window).keydown(function (e) {
             key = e.which;
+            istouch = false;
+            isclick = false;
             if (!dead) {
                 if (key === 68 || key === 39) {
                     state_cb = 'walk';
@@ -617,15 +619,17 @@ function canvasApp() {
                 if (key === 32 && load === total) {
                     intro.pause();
                     intro.currentTime = 0;
-                    setTimeout(init, 300);
+                    setTimeout(init, 500);
                 }
             } else {
                 dir_cb === 'fall';
                 if (key === 32) {
-                    clearInterval(loop);
-                    theme.pause();
-                    theme.currentTime = 0;
-                    setTimeout(init, 300);
+                    setTimeout(() => {
+                        clearInterval(loop);
+                        theme.pause();
+                        theme.currentTime = 0;
+                        init();
+                    }, 500);
                 }
             }
         });
@@ -645,7 +649,7 @@ function canvasApp() {
                     clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
                 intro.pause();
                 intro.currentTime = 0;
-                setTimeout(init, 1000);
+                setTimeout(init, 500);
             }
 
 
@@ -660,12 +664,14 @@ function canvasApp() {
         //Controlando o snake com o clique Native JS
         document.getElementById("canvas").addEventListener("click", function (event) {
             if (load >= total || dead) {
-                //Recriando o intervalo para o loop
-                if (typeof loop !== "undefined") //Testa se o loop já foi criado
-                    clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
-                intro.pause();
-                intro.currentTime = 0;
-                setTimeout(init, 1000);
+                setTimeout(() => {
+                    //Recriando o intervalo para o loop
+                    if (typeof loop !== "undefined") //Testa se o loop já foi criado
+                        clearInterval(loop); //Se o loop já existe então limpa o intervalo para depois ser recriado
+                    intro.pause();
+                    intro.currentTime = 0;
+                    init();
+                }, 1000);
             }
 
             event.preventDefault();
@@ -703,18 +709,17 @@ function canvasApp() {
         theme.load(); //Carregando o arquivo
         theme.volume = 1; //Configurando o volume
         //Testa se existe suporte à propriedade loop
-        if (typeof theme.loop === 'boolean')
-        {
-//  Se o navegador possui suporte apenas configuramos a propriedade 
-//loop para true
+        if (typeof theme.loop === 'boolean') {
+            //  Se o navegador possui suporte apenas configuramos a propriedade 
+            //loop para true
             theme.loop = true; //Execução em loop ativada
         } else {//Caso não exista suporte utilizaremos o evento ended para saber
-// quando a música chegou ao fim
-// ----
-// Com o evento ended chamamos um função que irá voltar ao início da
-//  reprodução do arquivo de 
-// áudio toda vez que a reprodução chegar ao final da música
-//Adicionando o evento ended (fim da reprodução)
+            // quando a música chegou ao fim
+            // ----
+            // Com o evento ended chamamos um função que irá voltar ao início da
+            //  reprodução do arquivo de 
+            // áudio toda vez que a reprodução chegar ao final da música
+            //Adicionando o evento ended (fim da reprodução)
             theme.addEventListener('ended', function () {
                 this.currentTime = 0; //Voltando a reprodução ao início da música
             }, false);
@@ -726,15 +731,15 @@ function canvasApp() {
             // console.log(theme.src);
         }, false);
         //Não compatível com maioria dos navegadores
-//    theme.addEventListener("progress", function(evt) {
-//        console.log(evt.lengthComputable);
-//        if (evt.lengthComputable) {
-//        var percentComplete = evt.loaded / evt.total;
-//        //Do something with download progress
-//        console.log(evt);
-//        console.log("LOAD "+theme.src+" "+percentComplete);
-//      }
-//  },false);
+        //    theme.addEventListener("progress", function(evt) {
+        //        console.log(evt.lengthComputable);
+        //        if (evt.lengthComputable) {
+        //        var percentComplete = evt.loaded / evt.total;
+        //        //Do something with download progress
+        //        console.log(evt);
+        //        console.log("LOAD "+theme.src+" "+percentComplete);
+        //      }
+        //  },false);
 
 
         punch_sound = new Audio(link2);
@@ -879,26 +884,26 @@ function canvasApp() {
     }
 
     function getWindowSize() {
-//Monstrando os tamanhos no console
-//        console.log("Wd " + document.documentElement.clientWidth + " | Ww " + window.innerWidth + "\n " +                "Hd " + document.documentElement.clientHeight + " | Hw " + window.innerHeight);
+        //Monstrando os tamanhos no console
+        //        console.log("Wd " + document.documentElement.clientWidth + " | Ww " + window.innerWidth + "\n " +                "Hd " + document.documentElement.clientHeight + " | Hw " + window.innerHeight);
 
         return {
             w: (window.innerWidth && document.documentElement.clientWidth ?
-                    Math.min(window.innerWidth, document.documentElement.clientWidth) :
-                    window.innerWidth ||
-                    document.documentElement.clientWidth ||
-                    document.getElementsByTagName('body')[0].clientWidth),
+                Math.min(window.innerWidth, document.documentElement.clientWidth) :
+                window.innerWidth ||
+                document.documentElement.clientWidth ||
+                document.getElementsByTagName('body')[0].clientWidth),
             h: (window.innerHeight && document.documentElement.clientHeight ?
-                    Math.min(window.innerHeight, document.documentElement.clientHeight) :
-                    window.innerHeight ||
-                    document.documentElement.clientHeight ||
-                    document.getElementsByTagName('body')[0].clientHeight)
+                Math.min(window.innerHeight, document.documentElement.clientHeight) :
+                window.innerHeight ||
+                document.documentElement.clientHeight ||
+                document.getElementsByTagName('body')[0].clientHeight)
         };
     }
 
     function resize() {
         size = getWindowSize();
-        if (Math.min(size.w, size.h) <= 600 ){//|| isMobile()) {
+        if (Math.min(size.w, size.h) <= 600) {//|| isMobile()) {
             w = size.w * 0.9;
             h = size.h * 0.9;
             text_size = Math.max(w, h) * 0.02;
