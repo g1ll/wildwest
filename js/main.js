@@ -156,7 +156,7 @@ function canvasApp() {
         }
         deadsound.currentTime = 0;
         theme.volume = 1;
-        // theme.play();
+        theme.play();
         clearInterval(loop);
         loop = setInterval(mainLoop, interval);
         //        setTimeout(function () {
@@ -213,12 +213,6 @@ function canvasApp() {
 
             if (getBag()) {
                 score += 50;
-            }
-
-            if (!moveu) {
-                print_center("Controle o cowboy com as teclas A B C D ! Fuja dos tiros !!!"
-                    , "rgba(0,0,0,.5)"
-                    , 36);
             }
         }
 
