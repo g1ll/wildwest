@@ -671,7 +671,7 @@ function canvasApp() {
             event.preventDefault();
             //Guarda as posições do toque
             touchX = event.clientX - (size.w - canvas.width) / 2;
-            touchY = event.clientY - 100;
+            touchY = event.clientY - 60;
             console.log("Click: X " + touchX + " Y " + touchY);
             isclick = true;
             state_cb = 'walk';
