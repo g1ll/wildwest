@@ -386,7 +386,7 @@ function canvasApp() {
             //Background
             context.fillStyle = "rgba(255,255,255,1)";
             context.fillRect(0, 0, canvas.width, canvas.height);
-            print_center("Carregando... " + p + "% ", canvas.height / 2 - 70, "rgba(0,0,0," + cload + ")", "bold", 24, "west");
+            print_center("Loading... " + p + "% ", canvas.height / 2 - 70, "rgba(0,0,0," + cload + ")", "bold", 24, "west");
             context.globalAlpha = p / 100;
             context.drawImage(img_cowboy_n, 0, 0, 48, 70, canvas.width / 2 - 24, canvas.height / 2 - 35, 48, 70);
             context.globalAlpha = 1;
