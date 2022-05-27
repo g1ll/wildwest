@@ -377,8 +377,10 @@ function canvasApp() {
             print_center("up, down, left and right  (←↑→↓) ", canvas.height / 2 - 75, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
             print_center("to capture the money bag", canvas.height / 2 - 50, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
             print_center("and scape of the shots!", canvas.height / 2 - 25, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
+            print_center("Click or touch to start", canvas.height / 2 + 85, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
+            print_center("or reset game if you die!", canvas.height / 2 + 105, "rgba(0,0,0," + cload + ")", "bold", 20, "west");
             context.globalAlpha = p / 100;
-            context.drawImage(img_cowboy_n, 0, 0, 48, 70, canvas.width / 2 - 24, canvas.height / 2 + 45, 48, 70);
+            context.drawImage(img_cowboy_n, 0, 0, 48, 70, canvas.width / 2 - 24, canvas.height / 2 + 15, 48, 70);
             context.globalAlpha = 1;
         } else {
             //Background
